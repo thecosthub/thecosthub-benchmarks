@@ -1,0 +1,40 @@
+benchmark_id: nda-redline
+name: "NDA & Vendor Contract Redline"
+category: "Legal & Contracts"
+description: >
+  Mutual NDA and standard SaaS agreement audit against internal playbook
+  with inline diff annotations, risk scoring, and clause-level recommendations.
+submitted_by: "@andreitulbure"
+experiment_date: "2026-08-30"
+
+ai_pipeline:
+  models:
+    - claude-3-5-sonnet
+    - rag-playbook-v2
+    - diff-guard
+  cost_per_unit_usd: 0.428
+  prompt_tokens_avg: 12500
+  completion_tokens_avg: 3200
+  latency_ms: 14200
+  accuracy_score: 99.1
+  stp_rate: 97.9
+  human_fallback_rate: 2.1
+  sample_size: 100
+
+human_baseline:
+  role: "Contract Attorney / Legal Ops"
+  hourly_rate_usd: 140.00
+  minutes_per_unit: 38.0
+  source: "Robert Half Legal Salary Guide 2026"
+
+saas_baseline:
+  name: "Ironclad / ContractPodAi"
+  cost_per_unit_usd: 35.00
+  pricing_model: "Per-contract processing (enterprise tier)"
+
+volume_config:
+  default: 450
+  min: 50
+  max: 5000
+  step: 50
+  label: "Monthly Agreement Volume"

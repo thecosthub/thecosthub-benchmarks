@@ -1,0 +1,23 @@
+{
+  "name": "thecosthub-benchmarks",
+  "version": "1.0.0",
+  "description": "Verified benchmark data for TheCostHub — AI Agent vs Human Employee unit economics",
+  "private": true,
+  "scripts": {
+    "verify": "npx ts-node scripts/verify-benchmark.ts",
+    "sync": "npx ts-node scripts/sync-to-dynamodb.ts",
+    "validate": "npx ts-node scripts/validate-schema.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1121.0",
+    "@aws-sdk/lib-dynamodb": "^3.1121.0",
+    "yaml": "^2.7.0",
+    "ajv": "^8.17.0",
+    "ajv-formats": "^3.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

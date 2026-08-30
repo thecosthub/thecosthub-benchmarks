@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env*
+!.env.example
+results/.verification-logs/
+results/.verification-report.md

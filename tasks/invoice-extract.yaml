@@ -1,0 +1,44 @@
+benchmark_id: invoice-extract
+name: "Invoice & Receipt Data Extraction"
+category: "Finance & AP"
+description: >
+  End-to-end unstructured multipage PDF table parsing, line-item matching
+  against purchase orders, and automated GL ledger coding. Evaluates the
+  full AP automation pipeline from document ingestion to ERP-ready output.
+submitted_by: "@andreitulbure"
+experiment_date: "2026-08-30"
+
+ai_pipeline:
+  models:
+    - gpt-4o-mini
+    - layoutlm-v3
+    - pydantic-eval
+  prompt_template: "prompts/invoice-extract.txt"
+  cost_per_unit_usd: 0.0214
+  prompt_tokens_avg: 1850
+  completion_tokens_avg: 420
+  tool_call_cost_usd: 0.0008
+  latency_ms: 650
+  p95_latency_ms: 820
+  accuracy_score: 99.4
+  stp_rate: 99.4
+  human_fallback_rate: 0.6
+  sample_size: 100
+
+human_baseline:
+  role: "Accounts Payable Specialist"
+  hourly_rate_usd: 34.00
+  minutes_per_unit: 8.5
+  source: "BLS Occupational Outlook Handbook 2026 - Bookkeeping, Accounting, and Auditing Clerks"
+
+saas_baseline:
+  name: "Kofax/ABBYY FlexiCapture"
+  cost_per_unit_usd: 0.85
+  pricing_model: "Per-page processing fee (enterprise tier)"
+
+volume_config:
+  default: 5000
+  min: 500
+  max: 50000
+  step: 500
+  label: "Monthly Document Volume"

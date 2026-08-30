@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TheCostHub Benchmark Task",
+  "type": "object",
+  "required": [
+    "benchmark_id",
+    "name",
+    "category",
+    "description",
+    "submitted_by",
+    "experiment_date",
+    "ai_pipeline",
+    "human_baseline",
+    "volume_config"
+  ],
+  "properties": {
+    "benchmark_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 5
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Finance & AP",
+        "Legal & Contracts",
+        "Customer Operations",
+        "Software & Dev",
+        "Healthcare & Claims",
+        "Data & Compliance"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20
+    },
+    "submitted_by": {
+      "type": "string"
+    },
+    "experiment_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "ai_pipeline": {
+      "type": "object",
+      "required": [
+        "models",
+        "cost_per_unit_usd",
+        "prompt_tokens_avg",
+        "completion_tokens_avg",
+        "latency_ms",
+        "sample_size"
+      ],
+      "properties": {
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "prompt_template": {
+          "type": "string"
+        },
+        "cost_per_unit_usd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "prompt_tokens_avg": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completion_tokens_avg": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "p95_latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "accuracy_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "stp_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "human_fallback_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 10
+        }
+      }
+    },
+    "human_baseline": {
+      "type": "object",
+      "required": [
+        "role",
+        "hourly_rate_usd",
+        "minutes_per_unit"
+      ],
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "hourly_rate_usd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "minutes_per_unit": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "saas_baseline": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "cost_per_unit_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pricing_model": {
+          "type": "string"
+        }
+      }
+    },
+    "volume_config": {
+      "type": "object",
+      "required": [
+        "default",
+        "min",
+        "max",
+        "step",
+        "label"
+      ],
+      "properties": {
+        "default": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

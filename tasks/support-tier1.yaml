@@ -1,0 +1,40 @@
+benchmark_id: support-tier1
+name: "Tier-1 Customer Support Ticket"
+category: "Customer Operations"
+description: >
+  Multi-turn voice or omnichannel chat ticket resolution with CRM lookups,
+  refund processing, and sentiment-aware escalation routing.
+submitted_by: "@andreitulbure"
+experiment_date: "2026-08-30"
+
+ai_pipeline:
+  models:
+    - claude-3-5-haiku
+    - deepgram-nova-2
+    - cartesia-sonic
+  cost_per_unit_usd: 0.182
+  prompt_tokens_avg: 3200
+  completion_tokens_avg: 850
+  latency_ms: 850
+  accuracy_score: 94.6
+  stp_rate: 94.6
+  human_fallback_rate: 5.4
+  sample_size: 100
+
+human_baseline:
+  role: "Customer Support Representative"
+  hourly_rate_usd: 28.00
+  minutes_per_unit: 12.0
+  source: "BLS Occupational Outlook Handbook 2026 - Customer Service Representatives"
+
+saas_baseline:
+  name: "Zendesk Enterprise + Agent Workspace"
+  cost_per_unit_usd: 2.40
+  pricing_model: "Per-resolution fee (Suite Enterprise tier)"
+
+volume_config:
+  default: 15000
+  min: 1000
+  max: 100000
+  step: 1000
+  label: "Monthly Ticket Volume"
