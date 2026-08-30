@@ -14,7 +14,7 @@
 
 Most LLM benchmarks measure abstract capability (MMLU, HumanEval, SWE-bench). **TheCostHub measures business unit economics**:
 - **Cost per unit ($/task)**: Prompt & completion tokens, tool API calls, human-in-the-loop fallback cost.
-- **Human labor baseline**: Fully loaded hourly rates across **39+ global labor markets** (US, UK, Germany, India, Philippines, etc.) calibrated with statutory employer taxes and benefits.
+- **Human labor baseline**: Fully loaded hourly rates across **65+ global labor markets across 6 continents** (US, UK, Germany, India, Philippines, etc.) calibrated with statutory employer taxes and benefits.
 - **Deterministic reproducibility**: Every benchmark metric published on the leaderboard traces directly to an immutable Git commit, execution log, and deterministic schema in this repository.
 
 ---
@@ -145,7 +145,7 @@ We welcome contributions from enterprise teams, AI startups, researchers, and de
 
 For CFOs, VP of Operations, and Enterprise Architects, we provide the **TheCostHub Monthly Unit Cost Index & Data Feed**:
 - **Continuous Raw JSON/CSV Telemetry Dumps**
-- **Excel (.xlsx) Labor vs AI Sensitivity Model** (with 39+ country labor calibrations)
+- **Excel (.xlsx) Labor vs AI Sensitivity Model** (with 65+ country labor calibrations)
 - **Priority Custom Benchmark Execution Queue**
 
 👉 Learn more at **[thecosthub.com/pricing](https://thecosthub.com/pricing)**
