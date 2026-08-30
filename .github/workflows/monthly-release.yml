@@ -1,0 +1,72 @@
+name: Monthly Unit Cost Index & Data Feed Release
+
+# Triggered on the 1st of every month at 00:00 UTC, or manually via workflow_dispatch
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openpyxl pyyaml
+
+      - name: Generate Monthly Bundle (JSON, CSV, XLSX)
+        run: |
+          python scripts/generate_monthly_bundle.py
+
+      - name: Commit Updated Data Exports
+        run: |
+          git config user.name "TheCostHub Release Bot"
+          git config user.email "bot@thecosthub.com"
+          git add data/exports/
+          git diff --staged --quiet || (git commit -m "chore(release): update monthly unit cost index [skip ci]" && git push)
+
+      - name: Determine Release Tag
+        id: release_tag
+        run: |
+          TAG="v$(date +'%Y.%m.01')"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "title=TheCostHub Unit Cost Index — $(date +'%B %Y')" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+        with:
+          tag_name: ${{ steps.release_tag.outputs.tag }}
+          name: ${{ steps.release_tag.outputs.title }}
+          body: |
+            ## TheCostHub Monthly Enterprise Benchmark & Data Feed
+            
+            This release contains the verified unit cost benchmarks, labor replacement economics, and financial sensitivity models for **${{ steps.release_tag.outputs.title }}**.
+            
+            ### Included Artifacts:
+            - **`TheCostHub_ROI_Financial_Model.xlsx`**: Excel sensitivity model with live labor vs. token formulas.
+            - **`monthly_index_latest.json`**: Structured programmatic JSON feed of all verified pipelines.
+            - **`monthly_unit_economics.csv`**: Flat spreadsheet export with multi-region comparisons.
+            
+            *Delivered automatically via TheCostHub Continuous Unit Cost Engine.*
+          files: |
+            data/exports/TheCostHub_ROI_Financial_Model.xlsx
+            data/exports/monthly_index_latest.json
+            data/exports/monthly_unit_economics.csv
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
