@@ -4,7 +4,7 @@ category: "Legal & Contracts"
 description: >
   Mutual NDA and standard SaaS agreement audit against internal playbook
   with inline diff annotations, risk scoring, and clause-level recommendations.
-submitted_by: "@andreitulbure"
+submitted_by: "@thecosthub"
 experiment_date: "2026-08-30"
 
 ai_pipeline:

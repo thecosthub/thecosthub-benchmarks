@@ -5,7 +5,7 @@ description: >
   End-to-end unstructured multipage PDF table parsing, line-item matching
   against purchase orders, and automated GL ledger coding. Evaluates the
   full AP automation pipeline from document ingestion to ERP-ready output.
-submitted_by: "@andreitulbure"
+submitted_by: "@thecosthub"
 experiment_date: "2026-08-30"
 
 ai_pipeline:

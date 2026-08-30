@@ -4,7 +4,7 @@ category: "Customer Operations"
 description: >
   Multi-turn voice or omnichannel chat ticket resolution with CRM lookups,
   refund processing, and sentiment-aware escalation routing.
-submitted_by: "@andreitulbure"
+submitted_by: "@thecosthub"
 experiment_date: "2026-08-30"
 
 ai_pipeline:
